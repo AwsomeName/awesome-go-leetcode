@@ -1,0 +1,27 @@
+package problem0003
+
+func lengthOfLongestSubstring(s string) int {
+  var tmp_cnt, max_cnt int
+  var tmp_str map[byte]int
+
+  for i:=0; i < len(s); i++{
+    if i == 0  {
+      tmp_str = make(map[byte]int, len(s)-i)
+    }
+    if j,ok := tmp_str[s[i]]; ok  {
+      i = i - tmp_cnt + j + 1
+      tmp_cnt = 0
+      tmp_str = make(map[byte]int, len(s)-i)
+      tmp_str[s[i]] = tmp_cnt
+      tmp_cnt = 1
+    }else {
+      tmp_str[s[i]] = tmp_cnt
+      tmp_cnt ++
+    }
+    if max_cnt < tmp_cnt {
+      max_cnt = tmp_cnt
+    }
+
+  }
+  return max_cnt
+}

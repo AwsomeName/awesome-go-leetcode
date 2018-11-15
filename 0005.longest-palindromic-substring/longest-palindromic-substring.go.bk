@@ -1,0 +1,25 @@
+package problem0005
+
+func longestPalindrome(s string) string{
+    if len(s) == 1 {return s}
+    len_s := len(s)
+    var max_cmp_index int
+    for max_len := len_s; max_len > 0; max_len--{ //
+        for start_index := 0; start_index <=len_s - max_len; start_index++{
+            Palindrome := true
+            max_cmp_index = start_index + (max_len -2)/2
+            for cmp_index:= start_index; cmp_index <= max_cmp_index; cmp_index++{
+                if s[cmp_index] != s[start_index + max_len - 1 -( cmp_index - start_index)]{
+                    cmp_index = start_index+max_len
+                    Palindrome = false
+                }else{
+                    Palindrome = true
+                }
+            }
+            if Palindrome{
+                return s[start_index:(start_index + max_len )]
+            }
+        }
+    }
+    return ""
+}
