@@ -30,6 +30,17 @@ func Test_Problem0015(t *testing.T) {
 	qs := []question{
 
 		question{
+			para{[]int{-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6}},
+			ans{[][]int{
+				[]int{-4,-2, 6},
+				[]int{-4, 0, 4},
+				[]int{-4, 1, 3},
+				[]int{-4, 2, 2},
+				[]int{-2,-2, 4},
+				[]int{-2, 0, 2},
+			}},
+		},
+		question{
 			para{[]int{1, -1, -1, 0}},
 			ans{[][]int{
 				[]int{-1, 0, 1},
