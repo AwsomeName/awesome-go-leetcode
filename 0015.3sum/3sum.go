@@ -15,8 +15,9 @@ func threeSum(nums []int) [][]int {
     var last, tmp []int
     for i := 0; i < len(nums)-2; i++ {
         if nums[i] > 0 { return res }
-        for i < len(nums)-3 && nums[i] == nums[i+1] && nums[i+1] == nums[i+2] { i++ }
+        for i > 0  && nums[i] != 0 && nums[i] == nums[i-1]  { i++ }
         for j := i + 1; j < len(nums) - 1; j++{
+            for j < len(nums)-3  && nums[j] == nums[j+1] && nums[j+1]==nums[j+2] { j++ }
             if nums[i] + nums[j] > 0 { break }
             if Index[0 - nums[i] - nums[j]] > j {
                 tmp = []int{nums[i],nums[j]}
