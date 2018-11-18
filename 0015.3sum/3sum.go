@@ -3,31 +3,52 @@ package problem0015
 import "sort"
 
 func threeSum(nums []int) [][]int {
-    res := [][]int{}
-    sort.Ints(nums)
+	// 排序后，可以按规律查找
+	sort.Ints(nums)
+	res := [][]int{}
 
-    Index := make(map[int]int, len(nums))
+	for i := range nums {
+		// 避免添加重复的结果
+		// i>0 是为了防止nums[i-1]溢出
+		if i > 0 && nums[i] == nums[i-1] {
+			continue
+		}
 
-    for i := range nums {
-        Index[nums[i]] = i
-    }
+		l, r := i+1, len(nums)-1
 
-    var last, tmp []int
-    for i := 0; i < len(nums)-2; i++ {
-        if nums[i] > 0 { return res }
-        for i > 0  && nums[i] != 0 && nums[i] == nums[i-1]  { i++ }
-        for j := i + 1; j < len(nums) - 1; j++{
-            for j < len(nums)-3  && nums[j] == nums[j+1] && nums[j+1]==nums[j+2] { j++ }
-            if nums[i] + nums[j] > 0 { break }
-            if Index[0 - nums[i] - nums[j]] > j {
-                tmp = []int{nums[i],nums[j]}
-                if last == nil || tmp[0] != last[0] || tmp[1] != last[1] {
-                    res = append(res, []int{nums[i], nums[j], nums[Index[0-nums[i]-nums[j]]]})
-                    last = tmp
-                }
-            }
-        }
-    }
+		for l < r {
+			s := nums[i] + nums[l] + nums[r]
+			switch {
+			case s < 0:
+				// 较小的 l 需要变大
+				l++
+			case s > 0:
+				// 较大的 r 需要变小
+				r--
+			default:
+				res = append(res, []int{nums[i], nums[l], nums[r]})
+				// 为避免重复添加，l 和 r 都需要移动到不同的元素上。
+				l, r = next(nums, l, r)
+			}
+		}
+	}
 
-    return res
+	return res
+}
+
+func next(nums []int, l, r int) (int, int) {
+	for l < r {
+		switch {
+		case nums[l] == nums[l+1]:
+			l++
+		case nums[r] == nums[r-1]:
+			r--
+		default:
+			l++
+			r--
+			return l, r
+		}
+	}
+
+	return l, r
 }
