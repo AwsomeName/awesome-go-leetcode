@@ -3,52 +3,47 @@ package problem0015
 import "sort"
 
 func threeSum(nums []int) [][]int {
-	// 排序后，可以按规律查找
-	sort.Ints(nums)
-	res := [][]int{}
-
-	for i := range nums {
-		// 避免添加重复的结果
-		// i>0 是为了防止nums[i-1]溢出
-		if i > 0 && nums[i] == nums[i-1] {
-			continue
-		}
-
-		l, r := i+1, len(nums)-1
-
-		for l < r {
-			s := nums[i] + nums[l] + nums[r]
-			switch {
-			case s < 0:
-				// 较小的 l 需要变大
-				l++
-			case s > 0:
-				// 较大的 r 需要变小
-				r--
-			default:
-				res = append(res, []int{nums[i], nums[l], nums[r]})
-				// 为避免重复添加，l 和 r 都需要移动到不同的元素上。
-				l, r = next(nums, l, r)
-			}
-		}
-	}
-
-	return res
-}
-
-func next(nums []int, l, r int) (int, int) {
-	for l < r {
-		switch {
-		case nums[l] == nums[l+1]:
-			l++
-		case nums[r] == nums[r-1]:
-			r--
-		default:
-			l++
-			r--
-			return l, r
-		}
-	}
-
-	return l, r
+    var result [][]int
+    n := len(nums)
+    sort.Ints(nums)
+    i := 0
+    for i < n {
+        if nums[i] > 0 {
+            break
+        }
+        j := i + 1
+        for j < n {
+             if nums[i]+nums[j] > 0 {
+                 break
+             }
+             l := j + 1 // left range
+             r := n - 1 // right range
+             // binary search
+             target := -nums[i] - nums[j]
+             for l <= r {
+                  m := l + (r-l)/2
+                  if target == nums[m] {
+                      result = append(result, []int{nums[i], nums[j], nums[m]})
+                      break
+                  } else if target < nums[m] {
+                      r = m - 1
+                  } else {
+                      l = m + 1
+                  }
+             }
+             // next j
+             j++
+             // skip same element
+             for j < n && nums[j-1] == nums[j] {
+                  j++
+             }
+        }
+        // next i
+        i++
+        // skip same element
+        for i < n && nums[i-1] == nums[i] {
+            i++
+        }
+    }
+    return result
 }
