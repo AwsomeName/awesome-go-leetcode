@@ -1,6 +1,7 @@
 package problem0016
 
 import "sort"
+import "fmt"
 
 func threeSumClosest(nums []int, target int) int {
     sort.Ints(nums)
@@ -13,22 +14,27 @@ func threeSumClosest(nums []int, target int) int {
             if l > r { break }
             tmpTarget := target - nums[i] - nums[j]
             tmp := nums[l]
+            tmp2 := nums[r]
             for (l < r){
                 m := (l + r ) / 2
                 if tmpTarget == nums[m] {
                     return target
-                } else if target < nums[m] {
+                } else if tmpTarget < nums[m] {
                     r = m - 1
                 } else {
                     l = m + 1
                 }
-                if m != j && m != i {
-                    tmp = nums[m]
-                }
+                tmp = nums[m]
             }
             if delta(result, target) > delta( nums[i] + nums[j] + tmp, target) {
                 result = nums[i]+ nums[j] + tmp
+                fmt.Println(result, nums[i], nums[j], tmp)
             }
+            if delta(result, target) > delta( nums[i] + nums[j] + tmp2, target) {
+                result = nums[i]+ nums[j] + tmp2
+                fmt.Println(result, nums[i], nums[j], tmp2)
+            }
+            fmt.Println(result, nums[i], nums[j], tmp, "-------------")
             for j < len(nums) && nums[j-1] == nums[j] { j++ }
 
         }
