@@ -1,33 +1,43 @@
 package problem0016
 
-import "sort"
-import "fmt"
+import (
+	"math"
+	"sort"
+)
 
 func threeSumClosest(nums []int, target int) int {
-    sort.Ints(nums)
-    result := nums[0] + nums[1] + nums[2]
-    for i := range nums{
-        if delta(result,target) == 0 { return result}
-        for j := i + 1; j < len(nums)-1; j++{
-            for x:=j+1; x <=len(nums)-1; x++{
-                if delta(result, target) > delta( nums[i] + nums[j] + nums[x], target) {
-                    result = nums[i]+ nums[j] + nums[x]
-                    fmt.Println(result, nums[i], nums[j], nums[x],"-------------")
-                }
-                fmt.Println(result, nums[i], nums[j], nums[x])
-            }
-            for j < len(nums) && nums[j-1] == nums[j] { j++ }
+	// 排序后，可以按规律查找
+	sort.Ints(nums)
+	res, delta := 0, math.MaxInt64
 
-        }
-        for i > 0 && i < len(nums) && nums[i-1] == nums[i] { i++ }
-    }
-    return result
-}
+	for i := range nums {
+		// 避免重复计算
+		if i > 0 && nums[i] == nums[i-1] {
+			continue
+		}
 
-func delta(a int, b int) int{
-    if a > b {
-        return a - b
-    } else {
-        return b - a
-    }
+		l, r := i+1, len(nums)-1
+
+		for l < r {
+			s := nums[i] + nums[l] + nums[r]
+			switch {
+			case s < target:
+				l++
+				if delta > target-s {
+					delta = target - s
+					res = s
+				}
+			case s > target:
+				r--
+				if delta > s-target {
+					delta = s - target
+					res = s
+				}
+			default:
+				return s
+			}
+		}
+	}
+
+	return res
 }
