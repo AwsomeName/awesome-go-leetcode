@@ -1,33 +1,25 @@
 package problem0020
 
-func isValid(str string) bool {
-    var stack [100]byte
-    var head int
-    if str == "" { return true }
-    for i := range str{
-        switch(str[i]){
-            case '(':
-                stack[head]='('
-                head ++
-            case '[':
-                stack[head]='['
-                head ++
-            case '{':
-                stack[head]='{'
-                head ++
-            case ')':
-                if head == 0 {return false}
-                if stack[head-1] == '(' { head -- }else { return false }
-            case ']':
-                if head == 0 {return false}
-                if stack[head-1] == '[' { head -- }else { return false }
-            case '}':
-                if head == 0 {return false}
-                if stack[head-1] == '{' { head -- }else { return false }
-            default:
-                return false
+func isValid(s string) bool {
+    if s == "" {
+        return true
+    }
+    stack :=  []rune{}
+    for _,v := range s {
+        if len(stack) == 0 {
+            stack = append(stack, v)
+            continue
+        }
+        // '(' is 40 and ')' is 41 , sum = 81
+        res := int(v) + int(stack[len(stack) - 1])
+        if res == 184 || res == 248 || res == 81 {
+            stack = stack[:len(stack) - 1]// out
+        }else {
+            stack = append(stack, v)// in
         }
     }
-    if head != 0 { return false }
-    return true
+    if len(stack) == 0{
+        return true
+    }
+    return false
 }
