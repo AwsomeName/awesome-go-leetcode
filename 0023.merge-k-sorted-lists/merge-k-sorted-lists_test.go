@@ -113,9 +113,3 @@ func ss2ls(numss [][]int) []*ListNode {
 	return res
 }
 
-func mergeKLists(lists []*ListNode) *ListNode {
-    if len(lists) == 0 {
-        return nil
-    }
-    return merge(lists)
-}
