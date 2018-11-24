@@ -1,14 +1,13 @@
 package problem0026
 
-func removeDuplicates(a []int) int {
-    if len(a) < 2 { return 1}
-    tmp := a[0]
-    cnt := 1
-    for i := 1; i<len(a) ; i++{
-        if tmp != a[i] {
-            cnt ++
-            tmp = a[i]
-        }
-    }
-	return cnt
+func removeDuplicates(nums []int) int {
+	left, right, size := 0, 1, len(nums)
+	for ; right < size; right++ {
+		if nums[left] == nums[right] {
+			continue
+		}
+		left++
+		nums[left], nums[right] = nums[right], nums[left]
+	}
+	return left + 1
 }

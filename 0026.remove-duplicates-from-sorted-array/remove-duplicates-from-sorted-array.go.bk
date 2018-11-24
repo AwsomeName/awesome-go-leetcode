@@ -1,0 +1,14 @@
+package problem0026
+
+func removeDuplicates(nums []int) int {
+    if len(nums) < 2 { return 1}
+    tmp := nums[0]
+    cnt := 1
+    for i := 1; i<len(nums) ; i++{
+        if tmp != nums[i] {
+            cnt ++
+            tmp = nums[i]
+        }
+    }
+	return cnt
+}
