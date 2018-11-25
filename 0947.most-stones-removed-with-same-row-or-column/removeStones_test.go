@@ -40,6 +40,14 @@ func Test_OK(t *testing.T) {
     },
     question{
       p: para{
+        one: [][]int{{0,1},{1,2},{1,3},{3,3},{2,3},{0,2}},
+      },
+      a: ans{
+        5,
+      },
+    },
+    question{
+      p: para{
         one: [][]int{{0,0}},
       },
       a: ans{
