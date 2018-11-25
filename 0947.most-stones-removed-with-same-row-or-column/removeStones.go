@@ -3,11 +3,11 @@ package problem0947
 func removeStones(stones [][]int) int {
     if len(stones) == 1 { return 0 }
     move := 0
-    var mark [1000]int
+    var mark [10000]int
     for i := range stones{
         if mark[i] > 0 {continue}
         move ++
-        var tmpQue [1000]int
+        var tmpQue [10000]int
         que_head := 0
         que_tail := 0
         tmpQue[que_head] = i
