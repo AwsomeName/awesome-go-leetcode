@@ -1,0 +1,44 @@
+package problem0948
+
+import "fmt"
+
+func bagOfTokensScore(tokens []int, P int) int {
+    fmt.Println("----------")
+    score := 0
+    max_score := 0
+    for len(tokens) > 0 {
+        if P < tokens[0] && score == 0 { break }
+        fmt.Println("P: ",P, "score: ", score, "tokens: ",tokens[0])
+        ///首先用P换取最小的token以得分
+        for len(tokens)> 0 && P >= tokens[0] {
+            fmt.Println("lose power for point")
+            if len(tokens)<= 1 {
+                if max_score <  score + 1 {
+                    return score + 1
+                }else {
+                    return max_score
+                }
+            }else {
+                P -= tokens[0]
+                score ++
+                fmt.Println("lose P: ",tokens[0], "now P: ",P, " now S: ", score)
+                fmt.Println("tokens: ", tokens)
+                tokens = tokens[1:len(tokens)]
+                fmt.Println("tokens: ", tokens)
+                if max_score <  score {
+                    max_score = score
+                }
+            }
+        }
+        ///用分数换取最大的token以加分
+        if score > 0 && len(tokens)>0 {
+            fmt.Println("lose point for power, token:", tokens)
+            score --
+            P += tokens[len(tokens)-1]
+            fmt.Println("get tokens:",tokens[len(tokens)-1], "now P:",P, "now S:", score)
+            tokens = tokens[0:len(tokens)-1]
+            fmt.Println("tokens: ", tokens)
+        }
+    }
+    return max_score
+}
