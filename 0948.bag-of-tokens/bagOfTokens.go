@@ -1,6 +1,9 @@
 package problem0948
 
+import "sort"
+
 func bagOfTokensScore(tokens []int, P int) int {
+    sort.Ints(tokens)
     score := 0
     max_score := 0
     for len(tokens) > 0 {
