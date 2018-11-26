@@ -1,84 +1,34 @@
 package problem0029
 
-import (
-	"math"
-)
+import "math"
 
 func divide(m, n int) int {
-	// 防止有人把0当做除数
-	if n == 0 {
-		return math.MaxInt32
-	}
-
-	signM, absM := analysis(m)
-	signN, absN := analysis(n)
-
-	res, _ := d(absM, absN, 1)
-
-	// 修改res的符号
-	if signM != signN {
-		res = res - res - res
-	}
-
-	// 检查溢出
-	if res < math.MinInt32 || res > math.MaxInt32 {
-		return math.MaxInt32
-	}
-
-	return res
+    if n == 0 { return math.MaxInt32 }
+    if m == 0 { return 0 }
+    var res int
+    var mSign,nSign,resSign int
+    if m > 0 {mSign = 1} else if m < 0 { mSign = -1}
+    if n > 0 {nSign = 1} else if n < 0 { nSign = -1}
+    if mSign + nSign == 0 { resSign = -1 } else { resSign = 1}
+    if m < 0 { m = -m }
+    if n < 0 { n = -n }
+    res,_ = recursion_divide(m,n,1)
+    if res > math.MaxInt32 { return math.MaxInt32}
+    if resSign > 0 { return res }else { return -res }
 }
 
-func analysis(num int) (sign, abs int) {
-	sign = 1
-	abs = num
-	if num < 0 {
-		sign = -1
-		abs = num - num - num
-	}
-
-	return
+func recursion_divide(m,n,cnt int)(res, rmd int){
+    switch{
+    case m < n:
+        return 0,m
+    case n <=m && m < n+n:
+        return cnt, m-n
+    default:
+        res, rmd = recursion_divide(m, n+n, cnt+cnt)
+        if rmd >=  n {
+            return res+cnt, rmd - n
+        }
+    }
+    return
 }
 
-// d 计算m/n的值，返回结果和余数
-// m >= 0
-// n > 0
-// count == 1, 代表初始n的个数，在递归过程中，count == 当前的n/初始的n
-func d(m, n, count int) (res, remainder int) {
-	switch {
-	case m < n:
-		return 0, m
-	case n <= m && m < n+n:
-		return count, m - n
-	default:
-		res, remainder = d(m, n+n, count+count)
-		if remainder >= n {
-			return res + count, remainder - n
-		}
-
-		return
-	}
-}
-
-// 以下为上述递归方法的普通实现方式
-// func d(m, n int) int {
-// 	res := 0
-// 	rs, ress := []int{n}, []int{1}
-// 	temp, i := n+n, 1
-
-// 	for temp <= m {
-// 		rs = append(rs, temp)
-// 		ress = append(ress, ress[i-1]+ress[i-1])
-
-// 		temp += temp
-// 		i++
-// 	}
-
-// 	for i := len(rs) - 1; i >= 0; i-- {
-// 		if m >= rs[i] {
-// 			m -= rs[i]
-// 			res += ress[i]
-// 		}
-// 	}
-
-// 	return res
-// }
