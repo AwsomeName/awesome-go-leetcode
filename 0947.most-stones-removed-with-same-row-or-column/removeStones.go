@@ -7,7 +7,7 @@ func removeStones(stones [][]int) int {
     for i := range stones{
         if mark[i] > 0 {continue}
         move ++
-        var tmpQue [10000]int
+        var tmpQue [2000]int
         que_head := 0
         que_tail := 0
         tmpQue[que_head] = i
