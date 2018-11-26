@@ -34,6 +34,10 @@ func Test_Problem0028(t *testing.T) {
 			para{"", ""},
 			ans{0},
 		},
+		question{
+			para{"a", "a"},
+			ans{0},
+		},
 
 		question{
 			para{"abcd", "bc"},
