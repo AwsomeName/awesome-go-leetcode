@@ -24,6 +24,8 @@ func longestValidParentheses(s string) int {
             res = tmpCnt
         }
     }
-    res -= leftCnt
+    if s[len(s)-1]==')' {
+        res -= leftCnt
+    }
     return res*2
 }
