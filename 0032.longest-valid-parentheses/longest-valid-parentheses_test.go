@@ -73,6 +73,14 @@ func Test_Problem0032(t *testing.T) {
 			ans{4},
 		},
 
+		question{
+			para{""},
+			ans{},
+		},
+		question{
+			para{"(()(((()"},
+			ans{2},
+		},
 		// 如需多个测试，可以复制上方元素。
 	}
 
