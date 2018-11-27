@@ -1,28 +1,38 @@
 package problem0033
 
-import "fmt"
-
 func search(nums []int, target int) int {
-    if len(nums) < 1 { return -1}
-    if len(nums)==1 {
-       if nums[0] == target { return 0} else { return -1}
-    }
-    tail := nums[len(nums)-1]
-    head := nums[0]
-    if target < head && target > tail { return -1 }
-    res := 0
-    left,right := 0, len(nums)-1
-    for left < right{
-        res = (left + right) /2
-        fmt.Println("before> left:",left,"right:",right,"res:",res,"target:",target,"nums[res]:",nums[res])
-        if nums[res] == target { return res }
-        if nums[res] < target && nums[res] > head || nums[res] > target && nums[res] < tail || nums[res] > tail && target < tail{
-            left = res + 1
-        }else {
-            right = res
-        }
-        fmt.Println("after> left:",left,"right:",right,"res:",res,"target:",target,"nums[res]:",nums[res])
-    }
-    if res > 1 && nums[res-1] == target { return res-1 }
-    return -1
+	rotated := indexOfMin(nums) /* 数组旋转了的距离 */
+	size := len(nums)
+	left, right := 0, size-1
+
+	for left <= right {
+		mid := (left + right) / 2
+		/* nums 是 rotated，所以需要使用 rotatedMid 来获取 mid 的值 */
+		rotatedMid := (rotated + mid) % size
+		switch {
+		case nums[rotatedMid] < target:
+			left = mid + 1
+		case target < nums[rotatedMid]:
+			right = mid - 1
+		default:
+			return rotatedMid
+		}
+	}
+
+	return -1
+}
+
+/* nums 是被旋转了的递增数组 */
+func indexOfMin(nums []int) int {
+	size := len(nums)
+	left, right := 0, size-1
+	for left < right {
+		mid := (left + right) / 2
+		if nums[right] < nums[mid] {
+			left = mid + 1
+		} else {
+			right = mid
+		}
+	}
+	return left
 }
