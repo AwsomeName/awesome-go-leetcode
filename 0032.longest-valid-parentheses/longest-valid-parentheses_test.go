@@ -34,6 +34,11 @@ func Test_Problem0032(t *testing.T) {
 		},
 
 		question{
+			para{"()()"},
+			ans{4},
+		},
+
+		question{
 			para{"()(()"},
 			ans{2},
 		},

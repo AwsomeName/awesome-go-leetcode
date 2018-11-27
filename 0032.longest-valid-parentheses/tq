@@ -1,0 +1,153 @@
+~~{)(()()))((((())))(}~~
+)
+head: 0 tmpCnt: 0 res: 0 leftCnt: 0
+)(
+head: 1 tmpCnt: 0 res: 0 leftCnt: 0
+)((
+head: 2 tmpCnt: 0 res: 0 leftCnt: 0
+)(()
+head: 1 tmpCnt: 1 res: 1 leftCnt: 0
+)(()(
+head: 2 tmpCnt: 1 res: 1 leftCnt: 0
+)(()()
+head: 1 tmpCnt: 2 res: 2 leftCnt: 0
+)(()())
+head: 0 tmpCnt: 3 res: 3 leftCnt: 0
+)(()()))
+head: 0 tmpCnt: 0 res: 3 leftCnt: 0
+)(()()))(
+head: 1 tmpCnt: 0 res: 3 leftCnt: 0
+)(()()))((
+head: 2 tmpCnt: 0 res: 3 leftCnt: 0
+)(()()))(((
+head: 3 tmpCnt: 0 res: 3 leftCnt: 0
+)(()()))((((
+head: 4 tmpCnt: 0 res: 3 leftCnt: 0
+)(()()))(((((
+head: 5 tmpCnt: 0 res: 3 leftCnt: 0
+)(()()))((((()
+head: 4 tmpCnt: 1 res: 3 leftCnt: 0
+)(()()))((((())
+head: 3 tmpCnt: 2 res: 3 leftCnt: 0
+)(()()))((((()))
+head: 2 tmpCnt: 3 res: 3 leftCnt: 0
+)(()()))((((())))
+head: 1 tmpCnt: 4 res: 4 leftCnt: 0
+)(()()))((((())))(
+head: 2 tmpCnt: 4 res: 4 leftCnt: 0
+head: 2 tmpCnt: 4 res: 4 leftCnt: 0
+~~{()()}~~
+(
+head: 1 tmpCnt: 0 res: 0 leftCnt: 0
+()
+head: 0 tmpCnt: 1 res: 1 leftCnt: 0
+()(
+head: 1 tmpCnt: 1 res: 1 leftCnt: 1
+()()
+head: 0 tmpCnt: 2 res: 2 leftCnt: 1
+head: 0 tmpCnt: 2 res: 1 leftCnt: 1
+~~{()(()}~~
+(
+head: 1 tmpCnt: 0 res: 0 leftCnt: 0
+()
+head: 0 tmpCnt: 1 res: 1 leftCnt: 0
+()(
+head: 1 tmpCnt: 1 res: 1 leftCnt: 1
+()((
+head: 2 tmpCnt: 1 res: 1 leftCnt: 1
+()(()
+head: 1 tmpCnt: 2 res: 2 leftCnt: 1
+head: 1 tmpCnt: 2 res: 1 leftCnt: 1
+~~{(()())}~~
+(
+head: 1 tmpCnt: 0 res: 0 leftCnt: 0
+((
+head: 2 tmpCnt: 0 res: 0 leftCnt: 0
+(()
+head: 1 tmpCnt: 1 res: 1 leftCnt: 0
+(()(
+head: 2 tmpCnt: 1 res: 1 leftCnt: 0
+(()()
+head: 1 tmpCnt: 2 res: 2 leftCnt: 0
+(()())
+head: 0 tmpCnt: 3 res: 3 leftCnt: 0
+head: 0 tmpCnt: 3 res: 3 leftCnt: 0
+~~{(()}~~
+(
+head: 1 tmpCnt: 0 res: 0 leftCnt: 0
+((
+head: 2 tmpCnt: 0 res: 0 leftCnt: 0
+(()
+head: 1 tmpCnt: 1 res: 1 leftCnt: 0
+head: 1 tmpCnt: 1 res: 1 leftCnt: 0
+~~{)()())}~~
+)
+head: 0 tmpCnt: 0 res: 0 leftCnt: 0
+)(
+head: 1 tmpCnt: 0 res: 0 leftCnt: 0
+)()
+head: 0 tmpCnt: 1 res: 1 leftCnt: 0
+)()(
+head: 1 tmpCnt: 1 res: 1 leftCnt: 1
+)()()
+head: 0 tmpCnt: 2 res: 2 leftCnt: 1
+)()())
+head: 0 tmpCnt: 0 res: 2 leftCnt: 0
+head: 0 tmpCnt: 0 res: 2 leftCnt: 0
+~~{((()))}~~
+(
+head: 1 tmpCnt: 0 res: 0 leftCnt: 0
+((
+head: 2 tmpCnt: 0 res: 0 leftCnt: 0
+(((
+head: 3 tmpCnt: 0 res: 0 leftCnt: 0
+((()
+head: 2 tmpCnt: 1 res: 1 leftCnt: 0
+((())
+head: 1 tmpCnt: 2 res: 2 leftCnt: 0
+((()))
+head: 0 tmpCnt: 3 res: 3 leftCnt: 0
+head: 0 tmpCnt: 3 res: 3 leftCnt: 0
+~~{((())))(((())))}~~
+(
+head: 1 tmpCnt: 0 res: 0 leftCnt: 0
+((
+head: 2 tmpCnt: 0 res: 0 leftCnt: 0
+(((
+head: 3 tmpCnt: 0 res: 0 leftCnt: 0
+((()
+head: 2 tmpCnt: 1 res: 1 leftCnt: 0
+((())
+head: 1 tmpCnt: 2 res: 2 leftCnt: 0
+((()))
+head: 0 tmpCnt: 3 res: 3 leftCnt: 0
+((())))
+head: 0 tmpCnt: 0 res: 3 leftCnt: 0
+((())))(
+head: 1 tmpCnt: 0 res: 3 leftCnt: 0
+((())))((
+head: 2 tmpCnt: 0 res: 3 leftCnt: 0
+((())))(((
+head: 3 tmpCnt: 0 res: 3 leftCnt: 0
+((())))((((
+head: 4 tmpCnt: 0 res: 3 leftCnt: 0
+((())))(((()
+head: 3 tmpCnt: 1 res: 3 leftCnt: 0
+((())))(((())
+head: 2 tmpCnt: 2 res: 3 leftCnt: 0
+((())))(((()))
+head: 1 tmpCnt: 3 res: 3 leftCnt: 0
+((())))(((())))
+head: 0 tmpCnt: 4 res: 4 leftCnt: 0
+head: 0 tmpCnt: 4 res: 4 leftCnt: 0
+--- FAIL: Test_Problem0032 (0.00s)
+	longest-valid-parentheses_test.go:78: 
+			Error Trace:	longest-valid-parentheses_test.go:78
+			Error:      	Not equal: 
+			            	expected: 4
+			            	actual  : 2
+			Test:       	Test_Problem0032
+			Messages:   	输入:{()()}
+FAIL
+exit status 1
+FAIL	_/home/ubuntu/awesome-go-leetcode/0032.longest-valid-parentheses	0.006s

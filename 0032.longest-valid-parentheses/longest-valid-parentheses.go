@@ -15,6 +15,8 @@ func longestValidParentheses(s string) int {
                 tmpCnt++
             }else {
                 tmpCnt = 0
+            }
+            if head == 0 {
                 leftCnt = 0
             }
         }
