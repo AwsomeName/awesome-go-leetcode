@@ -13,7 +13,7 @@ func nextPermutation(nums []int) {
     if index >= 0 {
         tmp_max := math.MaxInt32
         for i:= index+1; i < len(nums); i++{
-            if nums[i] > nums[index] && nums[i] < tmp_max {
+            if nums[i] > nums[index] && nums[i] <= tmp_max {
                 tmp_max = nums[i]
                 r_index = i
             }

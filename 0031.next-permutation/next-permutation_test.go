@@ -47,6 +47,11 @@ var qs = []question{
 	},
 
 	question{
+		para{[]int{2,3,1,3,3}},
+		ans{[]int{2,3,3,1,3}},
+	},
+
+	question{
 		para{[]int{1, 2, 7, 4, 3, 1}},
 		ans{[]int{1, 3, 1, 2, 4, 7}},
 	},
