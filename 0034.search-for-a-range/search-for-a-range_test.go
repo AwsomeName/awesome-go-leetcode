@@ -41,6 +41,11 @@ func Test_Problem0034(t *testing.T) {
 
 
 		question{
+			para{[]int{1,4},4},
+			ans{[]int{1, 1}},
+		},
+
+		question{
 			para{[]int{1},1},
 			ans{[]int{0, 0}},
 		},

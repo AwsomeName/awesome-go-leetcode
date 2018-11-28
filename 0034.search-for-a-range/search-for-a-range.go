@@ -9,8 +9,9 @@ func searchRange(nums []int, target int) []int {
     }
     left, right := 0, len(nums)-1
     est:= -1
-    for left < right {
+    for left <= right {
         mid:= (left + right)/2
+        fmt.Println("left:",left,"right:",right,"mid:",mid,"nums:",nums[mid])
         if nums[mid] == target {
             est = mid
             break
@@ -20,6 +21,7 @@ func searchRange(nums []int, target int) []int {
         }else {
             right = mid - 1
         }
+        fmt.Println("after","left:",left,"right:",right,"mid:",mid,"nums:",nums[mid])
     }
     fmt.Println("est:",est)
     left,right = est,est
