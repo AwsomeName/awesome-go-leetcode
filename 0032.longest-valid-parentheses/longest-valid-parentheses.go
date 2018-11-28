@@ -1,42 +1,38 @@
 package problem0032
 
+import "fmt"
+
 func longestValidParentheses(s string) int {
-	var left, max, temp int
-	record := make([]int, len(s))
-
-	// 统计Record
-	for i, b := range s {
-		if b == '(' {
-			left++
-		} else if left > 0 {
-			left--
-			record[i] = 2
-		}
-	}
-
-	// 修改record
-	for i := 0; i < len(record); i++ {
-		if record[i] == 2 {
-			j := i - 1
-			for record[j] != 0 {
-				j--
-			}
-			record[i], record[j] = 1, 1
-		}
-	}
-
-	// 统计结果
-	for _, r := range record {
-		if r == 0 {
-			temp = 0
-			continue
-		}
-
-		temp++
-		if temp > max {
-			max = temp
-		}
-	}
-
-	return max
+    if  s=="" { return 0 }
+    var res int
+    lParStk := make([]int, len(s))
+    lParHdr := 0
+    marks := make([]bool, len(s))
+    for i,par := range s{
+        if par == '(' {
+            lParStk[lParHdr] = i
+            lParHdr++
+        }else{
+            if lParHdr > 0 {
+                lParHdr--
+                marks[lParStk[lParHdr]],marks[i] = true, true
+            }
+        }
+    }
+    fmt.Println("match:",s)
+    fmt.Println("match:",marks)
+    for i,mark := range marks{
+        tmpCnt:=0
+        for mark && i<len(s) {
+            tmpCnt++
+            i++
+            if i<len(s) {
+                mark = marks[i]
+            }
+        }
+        if tmpCnt >  res {
+            res = tmpCnt
+        }
+    }
+    return res
 }
