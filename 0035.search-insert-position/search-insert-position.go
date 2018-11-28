@@ -4,7 +4,7 @@ import "fmt"
 func searchInsert(nums []int, target int) int {
     if len(nums) < 1 {{ return 0}}
     if len(nums) == 1 {
-        if nums[0] >= target { return 1} else { return 0}
+        if nums[0] >= target { return 0} else { return 1}
     }
 
     left,right := 0, len(nums)-1
