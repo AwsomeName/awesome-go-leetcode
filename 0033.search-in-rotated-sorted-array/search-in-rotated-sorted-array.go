@@ -13,7 +13,7 @@ func search(nums []int, target int) int{
 
     for left<right {
         midm:=(left+right)/2
-        if nums[midm] > nums[0] {
+        if nums[midm] > nums[right] {
             left = midm+1
         } else {
             right = midm

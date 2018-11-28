@@ -70,6 +70,16 @@ func Test_Problem0033(t *testing.T) {
 			ans{-1},
 		},
 
+		question{
+			para{[]int{3,1}, 1},
+			ans{1},
+		},
+
+		question{
+			para{[]int{1,3}, 1},
+			ans{0},
+		},
+
 		// 如需多个测试，可以复制上方元素。
 	}
 
