@@ -112,4 +112,3 @@ func ss2ls(numss [][]int) []*ListNode {
 
 	return res
 }
-

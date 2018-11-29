@@ -47,8 +47,8 @@ var qs = []question{
 	},
 
 	question{
-		para{[]int{2,3,1,3,3}},
-		ans{[]int{2,3,3,1,3}},
+		para{[]int{2, 3, 1, 3, 3}},
+		ans{[]int{2, 3, 3, 1, 3}},
 	},
 
 	question{

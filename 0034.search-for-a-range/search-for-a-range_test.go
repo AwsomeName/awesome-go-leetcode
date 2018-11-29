@@ -35,18 +35,17 @@ func Test_Problem0034(t *testing.T) {
 			ans{[]int{3, 4}},
 		},
 		question{
-			para{[]int{1,1},1},
+			para{[]int{1, 1}, 1},
 			ans{[]int{0, 1}},
 		},
 
-
 		question{
-			para{[]int{1,4},4},
+			para{[]int{1, 4}, 4},
 			ans{[]int{1, 1}},
 		},
 
 		question{
-			para{[]int{1},1},
+			para{[]int{1}, 1},
 			ans{[]int{0, 0}},
 		},
 

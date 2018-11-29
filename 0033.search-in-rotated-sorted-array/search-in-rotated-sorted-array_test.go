@@ -71,12 +71,12 @@ func Test_Problem0033(t *testing.T) {
 		},
 
 		question{
-			para{[]int{3,1}, 1},
+			para{[]int{3, 1}, 1},
 			ans{1},
 		},
 
 		question{
-			para{[]int{1,3}, 1},
+			para{[]int{1, 3}, 1},
 			ans{0},
 		},
 
@@ -116,18 +116,15 @@ func Test_indexOfMin_oddLength(t *testing.T) {
 }
 
 func indexOfMin(nums []int) int {
-    size := len(nums)
-    left, right := 0, size -1
-    for left < right {
-        mid := (left + right) /2
-        if nums[right] < nums[mid] {
-            left = mid + 1
-        } else {
-            right = mid
-        }
-    }
-    return left
+	size := len(nums)
+	left, right := 0, size-1
+	for left < right {
+		mid := (left + right) / 2
+		if nums[right] < nums[mid] {
+			left = mid + 1
+		} else {
+			right = mid
+		}
+	}
+	return left
 }
-
-
-

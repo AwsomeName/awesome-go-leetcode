@@ -1,8 +1,8 @@
 package problem0006
 
 import (
-	"testing"
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
 type para struct {

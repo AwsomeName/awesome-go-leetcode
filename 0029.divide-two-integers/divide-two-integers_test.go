@@ -98,21 +98,17 @@ func Test_d(t *testing.T) {
 	ast.Equal(2147483647, res, "结果不对")
 }
 
-func d(m,n,count int) (res, remainder int){
-    switch {
-    case m<n:
-        return 0,m
-    case n<=m && m < n+n:
-        return count, m-n
-    default:
-        res, remainder = d(m,n+n, count+count)
-        if remainder >= n{
-            return res+count, remainder -n
-        }
-    }
-    return
+func d(m, n, count int) (res, remainder int) {
+	switch {
+	case m < n:
+		return 0, m
+	case n <= m && m < n+n:
+		return count, m - n
+	default:
+		res, remainder = d(m, n+n, count+count)
+		if remainder >= n {
+			return res + count, remainder - n
+		}
+	}
+	return
 }
-
-
-
-
