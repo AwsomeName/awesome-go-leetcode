@@ -17,24 +17,23 @@ func deckRevealedIncreasing(deck []int) []int {
         return deck
     }
     for i:= len(deck)-1; i >=0; i--{
-        tmp:= res
-        if len(tmp) < 1 {
+        if len(res) < 1 {
             res = append(res,deck[i])
             continue
         }
 
-        if len(tmp) > 1{
+        if len(res) > 1{
             tres := make([]int, 2)
             tres[0] = deck[i]
-            tres[1] = tmp[len(tmp)-1]
-            for j:=0; j<len(tmp)-1; j++{
-               tres = append(tres,tmp[j])
+            tres[1] = res[len(res)-1]
+            for j:=0; j<len(res)-1; j++{
+               tres = append(tres,res[j])
             }
             res = tres
         }else {
             tres := make([]int,2)
             tres[0] = deck[i]
-            tres[1] = tmp[0]
+            tres[1] = res[0]
             res = tres
         }
     }
