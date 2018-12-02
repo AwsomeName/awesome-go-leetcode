@@ -1,4 +1,4 @@
-package problem0950
+package problem0952
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -10,7 +10,7 @@ type para struct {
 }
 
 type ans struct {
-	ans []int
+	ans int
 }
 
 type question struct {
@@ -24,16 +24,32 @@ func Test_OK(t *testing.T) {
 	qs := []question{
 		question{
 			p: para{
-				one: []int{17,13,11,2,3,5,7},
+				one: []int{4,6,15,35},
 			},
 			a: ans{
-                []int{2,13,3,11,5,17,7},
+				4,
+			},
+		},
+		question{
+			p: para{
+				one: []int{20,50,9,63},
+			},
+			a: ans{
+				2,
+			},
+		},
+		question{
+			p: para{
+				one: []int{2,3,6,7,4,12,21,39},
+			},
+			a: ans{
+				8,
 			},
 		},
 	}
 
 	for _, q := range qs {
 		a, p := q.a, q.p
-		ast.Equal(a.ans, deckRevealedIncreasing(p.one), "input:%v", p)
+		ast.Equal(a.ans, largestComponentSize(p.one), "input:%v", p)
 	}
 }
