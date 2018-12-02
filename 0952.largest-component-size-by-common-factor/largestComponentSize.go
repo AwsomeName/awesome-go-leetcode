@@ -138,6 +138,7 @@ func largestComponentSize(A []int) int {
 	}
 
 	connections := make([][]bool, len(A))
+//	var connections [20000][20000]bool
 	for i := range connections {
 		connections[i] = make([]bool, len(A))
 	}
@@ -154,12 +155,14 @@ func largestComponentSize(A []int) int {
 			if PMap[A[j]] || PMap[A[i]] {
 				if A[i]%A[j] == 0 || A[j]%A[i] == 0 {
 					connections[i][j] = true
+					connections[j][i] = true
 				}
 				continue
 			}
 			for k := 0; k < len(PInts)/2 && PInts[k] <= A[i] && PInts[k] <= A[j]; k++ {
 				if A[i]%PInts[k] == 0 && A[j]%PInts[k] == 0 {
 					connections[i][j] = true
+					connections[j][i] = true
 					break
 				}
 			}
@@ -169,7 +172,7 @@ func largestComponentSize(A []int) int {
 	mark := make([]bool, len(A))
 	tmpQue := make([]int, len(A))
 	var res int
-	for i := range A {
+	for i := 0; i< len(A) && res < len(A)-i; i++ {
 		//        fmt.Println("i:",i,"A[i]:",A[i],"mark:",mark[i],"cnt:",connections[i])
 		if mark[i] {
 			continue
@@ -189,17 +192,16 @@ func largestComponentSize(A []int) int {
 			mark[tmp] = true
 			cnt++
 			for j := range A {
-				if mark[j] || tmp == j || queMap[j] {
+				if mark[j] || queMap[j] || tmp == j {
 					continue
 				}
 				//                fmt.Println("tmp,j:",tmp,j,"conts:",connections[tmp][j],connections[j][tmp])
-				if (connections[tmp][j] || connections[j][tmp]) && !queMap[j] {
+				if connections[tmp][j]  {
+				//if connections[tmp][j] || connections[j][tmp] {
 					que_tail++
-					//                    fmt.Println("qtail:",que_tail)
 					tmpQue[que_tail] = j
                     queMap[j] = true
 				}
-				//                fmt.Println("que:",tmpQue)
 			}
 		}
 		if res < cnt {
