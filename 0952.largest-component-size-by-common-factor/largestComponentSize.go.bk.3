@@ -1,0 +1,59 @@
+package problem0952
+
+//import "fmt"
+
+func largestComponentSize(A []int) int {
+	if len(A) == 1 {
+		return 1
+	}
+
+    Con := func(i,j int) bool{
+		for k := 2; k <= A[i] && k <= A[j]; k++ {
+			if A[i]%k == 0 && A[j]%k == 0 {
+                return true
+			}
+		}
+        return false
+    }
+	// search the max graph
+	mark := make([]bool, len(A))
+	tmpQue := make([]int, len(A))
+	var res int
+	for i := 0; i< len(A) && res < len(A)-i; i++ {
+		//        fmt.Println("i:",i,"A[i]:",A[i],"mark:",mark[i],"cnt:",connections[i])
+		if mark[i] || A[i] == 1 {
+			continue
+		}
+		que_head := 0
+		que_tail := 0
+        queMap := make(map[int]bool,len(A))
+		cnt := 0
+		tmpQue[que_head] = i
+        queMap[i] = true
+		for que_head <= que_tail {
+			tmp := tmpQue[que_head]
+			que_head++
+			if mark[tmp] {
+				continue
+			}
+			mark[tmp] = true
+			cnt++
+			for j := range A {
+				if mark[j] || queMap[j] || A[j] == 1 || tmp == j {
+					continue
+				}
+				//                fmt.Println("tmp,j:",tmp,j,"conts:",connections[tmp][j],connections[j][tmp])
+//				if connections[tmp][j]  {
+				if Con(tmp, j)  {
+					que_tail++
+					tmpQue[que_tail] = j
+                    queMap[j] = true
+				}
+			}
+		}
+		if res < cnt {
+			res = cnt
+		}
+	}
+	return res
+}

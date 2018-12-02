@@ -157,7 +157,7 @@ func largestComponentSize(A []int) int {
 	var res int
 	for i := 0; i< len(A) && res < len(A)-i; i++ {
 		//        fmt.Println("i:",i,"A[i]:",A[i],"mark:",mark[i],"cnt:",connections[i])
-		if mark[i] || A[i] == 1 || (A[i] > 5000 && PMap[A[i]]) {
+		if mark[i] || A[i] == 1 {
 			continue
 		}
 		que_head := 0
@@ -175,7 +175,7 @@ func largestComponentSize(A []int) int {
 			mark[tmp] = true
 			cnt++
 			for j := range A {
-				if mark[j] || queMap[j] || A[j] == 1 || tmp == j || (A[j]>5000 && PMap[A[j]]) {
+				if mark[j] || queMap[j] || A[j] == 1 || tmp == j {
 					continue
 				}
 				//                fmt.Println("tmp,j:",tmp,j,"conts:",connections[tmp][j],connections[j][tmp])
