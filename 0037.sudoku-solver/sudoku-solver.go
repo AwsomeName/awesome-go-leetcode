@@ -1,40 +1,141 @@
 package problem0037
 
-func solveSudoku(board [][]byte) {
-	solve(board, 0)
+import "fmt"
+
+type cell struct{ // encapsulates a single cell on a a Sudoku board
+    Value int; // cell value 1..9 or 0 if unset
+    NumPossibilities int; // number of possible (unconstrained) values
+    Constraints [10]bool // if constraints[v] is true then value cant be v
 }
 
-/* k 是把 board 转换成一维数组后，元素的索引值 */
-func solve(board [][]byte, k int) bool {
-    if k==81 {
+func(Cil cell) CellInit (){
+    Cil.Value = 0
+    Cil.NumPossibilities = 9
+//    constraints
+}
+
+var CELLS [9][9]cell
+var bt [][]int
+
+// set the value of the cell to [v]
+// the function also propagates constraints to other cells and deduce new value where possible
+func set(i,j,v int) bool {
+    // updating state of the cell
+    c := CELLS[i][j]
+    if (c.Value == v){
         return true
     }
-
-    r,c := k/9, k%9
-    if board[r][c] != '.' {
-        return  solve(board, k+1)
+    if (c.Constraints[v]){
+        return false
     }
-
-    // bi, bj 是 rc 所在块额左上角元素的索引值
-    bi, bj := r/3*3, c/3*3
-
-    isValid := func(b byte) bool {
-        for n:=0; n<9 ;n++{
-            if board[r][n] == b || board[n][c] == b || board[bi+n/3][bj+n%3] ==b{
-                return false
-            }
+    c.Constraints[v] = false // and else need to be true
+    c.NumPossibilities = 1
+    c.Value = v
+    // propagating constraints
+    for k:=0; k<9; k++{
+        // to the row:
+        if (i!=k && !updateConstraints(k,j,v)){
+            return false
         }
+        // to the column:
+        if (j != k && !updateConstraints(i,k,v)){
+            return false
+        }
+        // to the 3*3 square
+        ix := (i/3)*3 + k/3
+        jx := (j/3) * 3 + k%3
+        if (ix != i && jx != j && !updateConstraints(ix,jx,v)){
+            return false
+        }
+    }
+    return true
+}
+
+// update constraints of the call i,j by excluding possibility of excludedValue
+// once there's one possibility left the function recurses back into set()
+func updateConstraints(i,j,v int) bool{
+    c := CELLS[i][j]
+    if (c.Constraints[v]) {
         return true
     }
-
-    for b := byte('1'); b <= '9'; b++{
-        if isValid(b) {
-            board[r][c] = b
-            if solve(board, k+1) {
-                return true
-            }
+    if (c.Value == v) {
+        return false
+    }
+    c.Constraints[v] = true
+    c.NumPossibilities--
+    if c.NumPossibilities > 1 {
+        return true
+    }
+    for _,cons := range c.Constraints{
+        if !cons {
+            return set(i,j,v)
         }
     }
-    board[r][c] = '.'
     return false
+}
+
+func findValuesForEmptyCells() bool{
+    for i:=0; i<9; i++{
+        for j:=0; j<9; j++{
+            if CELLS[i][j].Value == 0 {
+                bt = append(bt, []int{i,j})
+            }
+        }
+    }
+
+    for i := range bt{
+        for j:= i+1; j < len(bt); j++{
+            if CELLS[bt[i][0]][bt[i][1]].Value > CELLS[bt[j][0]][bt[j][1]].Value{
+                bt[i],bt[j] = bt[j],bt[i]
+            }
+        }
+    }
+
+
+    if len(bt) > 0 {
+        return backtrack(0)
+    }else {
+        return true
+    }
+}
+
+func backtrack(k int) bool{
+
+
+
+
+
+
+    return true
+}
+
+
+func solveSudoku(board [][]byte) {
+    fmt.Println("----------")
+    // declear 9*9 cells and init
+    for i:= range CELLS{
+        for j:= range CELLS[i]{
+            CELLS[i][j].CellInit()
+            fmt.Println("cell.value:",CELLS[i][i].Value)
+        }
+    }
+
+    for i:=0; i<9; i++{
+        for j:=0; j<9; j++{
+            if board[i][j] != '.' && !set(i,j,int(board[i][j] - '0')){
+                return
+            }
+        }
+    }
+    if !findValuesForEmptyCells(){
+        return
+    }
+
+    for i:=0; i<9; i++{
+        for j:=0; j<9; j++{
+            if CELLS[i][j].Value > 0 {
+                board[i][j] = byte(CELLS[i][j].Value + '0')
+            }
+        }
+    }
 }
