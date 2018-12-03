@@ -2,12 +2,6 @@ package problem0952
 
 //import "fmt"
 
-type primSet struct {
-    Prime int
-    Cnt int
-    Parent *primSet
-}
-
 func largestComponentSize(A []int) int {
 	if len(A) == 1 {
 		return 1
@@ -142,97 +136,64 @@ func largestComponentSize(A []int) int {
 	for _, int := range PInts {
 		PMap[int] = true
 	}
-
-    //rSet := make([]primSet, 400)
-    rSetMap := make(map[int]*primSet,400 )
-
-    var res int
-    //fmt.Println("A:",A)
-    for _,a:= range A{
-        if a == 1 { continue }
-        //fmt.Println("a:",a)
-        //遍历A，计算A的因子，A的所有因子，都添加到因子集合，指向最小的因子
-        //如果这个因子已经存在，将它指向最小因子。如果这个因子不存在，那么就添加这个因子，并且指向最小因子
-        //如果最小因子不存在，就新建。最最后给最小因子加一。
-        minFactor := a
-        var j int
-        for j= 0; j<len(PInts) && PInts[j] < a; j++{
-            if a%PInts[j] == 0 {
-                //fmt.Println("now factor:",PInts[j])
-                if PInts[j] < minFactor {
-                    minFactor = PInts[j]
-                }
-                if rSetMap[minFactor] == nil{
-                    //fmt.Println("set minFactor", minFactor)
-                    rSetMap[minFactor] = &primSet{ Prime:minFactor }
-                }
-                if rSetMap[PInts[j]]==nil {
-                    //fmt.Println("set Pj && point to minFactor", PInts[j],minFactor)
-                    rSetMap[PInts[j]] = &primSet{ Prime:PInts[j], Parent:rSetMap[minFactor]}
-                }else {
-                    //如果这个因子存在，那么它已经有指向的最小因子了。需要 point to当前的最小因子
-                    if rSetMap[PInts[j]].Parent == nil  {
-                        if PInts[j] == minFactor {
-                            //fmt.Println("now is minFactor, exist && equil",minFactor)
-                            continue
-                        }
-                        rSetMap[PInts[j]].Parent = rSetMap[minFactor]
-                        rSetMap[minFactor].Cnt += rSetMap[PInts[j]].Cnt
-                        rSetMap[PInts[j]].Cnt = 0
-                    }else {
-                        //fmt.Println("exist prim,parent")
-                        tmpPtr := rSetMap[PInts[j]]
-                        //fmt.Println("tmpPtr.Cnt:",tmpPtr.Cnt)
-                        //fmt.Println("rSetMap:",rSetMap)
-                        for tmpPtr.Parent != nil && tmpPtr.Cnt == 0 {
-                            tmpPtr = tmpPtr.Parent
-                            //fmt.Println("tmpPtr.Prime:",tmpPtr.Prime,tmpPtr.Cnt)
-                        }
-                        //fmt.Println("old cnt:",tmpPtr.Cnt)
-                        if rSetMap[minFactor].Parent == tmpPtr{
-                            //fmt.Println("reset min parent")
-                            rSetMap[minFactor].Parent = nil
-                        }
-                        if tmpPtr.Prime != minFactor {
-                            //fmt.Println("change parent",tmpPtr.Prime,rSetMap[minFactor].Prime)
-                            tmpPtr.Parent = rSetMap[minFactor]
-                            rSetMap[minFactor].Cnt += tmpPtr.Cnt
-                            tmpPtr.Cnt = 0
-                        }
-                    }
-                }
-            }
-        }
-        //处理一下该数自己，如果是质数
-        if a==minFactor {
-            if rSetMap[minFactor] == nil{
-                rSetMap[minFactor] = &primSet{ Prime:minFactor }
-            } else {
-                if rSetMap[a].Parent != nil {
-                    tmp := rSetMap[a]
-                    for tmp.Parent != nil && tmp.Cnt == 0 {
-                        tmp = tmp.Parent
-                    }
-                    minFactor = tmp.Prime
-                }
-            }
-        }
-
-        //minFactor cnt ++
-        rSetMap[minFactor].Cnt ++
-        //fmt.Println("a:",a,"minFactor:",minFactor,"Cnt:",rSetMap[minFactor].Cnt, "min.Par:",rSetMap[minFactor].Parent)
-
-        if  res < rSetMap[minFactor].Cnt {
-            res = rSetMap[minFactor].Cnt
+    for i:= range A{
+        if PMap[A[i]] && A[i] > 5000{
+            A[i] = 1
         }
     }
-    for x:= range rSetMap{
-        //fmt.Println("------------------------------")
-        //fmt.Println("Prime:",rSetMap[x].Prime)
-        //fmt.Println("Cnt:",rSetMap[x].Cnt)
-        if rSetMap[x].Parent != nil {
-            //fmt.Println("Parent:",rSetMap[x].Parent.Prime)
-        }
+
+    Con := func(i,j int) bool{
+		if PMap[A[j]] || PMap[A[i]] {
+			if A[i]%A[j] == 0 || A[j]%A[i] == 0 {
+                return true
+			}
+		}
+		for k := 0; k < len(PInts)/2 && PInts[k] <= A[i] && PInts[k] <= A[j]; k++ {
+			if A[i]%PInts[k] == 0 && A[j]%PInts[k] == 0 {
+                return true
+			}
+		}
+        return false
     }
+	// search the max graph
+	mark := make([]bool, len(A))
+	tmpQue := make([]int, len(A))
+	var res int
+	for i := 0; i< len(A) && res < len(A)-i; i++ {
+		//        fmt.Println("i:",i,"A[i]:",A[i],"mark:",mark[i],"cnt:",connections[i])
+		if mark[i] || A[i] == 1 {
+			continue
+		}
+		que_head := 0
+		que_tail := 0
+        queMap := make(map[int]bool,len(A))
+		cnt := 0
+		tmpQue[que_head] = i
+        queMap[i] = true
+		for que_head <= que_tail {
+			tmp := tmpQue[que_head]
+			que_head++
+			if mark[tmp] {
+				continue
+			}
+			mark[tmp] = true
+			cnt++
+			for j := range A {
+				if mark[j] || queMap[j] || A[j] == 1 || tmp == j {
+					continue
+				}
+				//                fmt.Println("tmp,j:",tmp,j,"conts:",connections[tmp][j],connections[j][tmp])
+//				if connections[tmp][j]  {
+				if Con(tmp, j)  {
+					que_tail++
+					tmpQue[que_tail] = j
+                    queMap[j] = true
+				}
+			}
+		}
+		if res < cnt {
+			res = cnt
+		}
+	}
 	return res
 }
