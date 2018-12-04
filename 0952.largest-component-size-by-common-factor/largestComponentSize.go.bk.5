@@ -210,6 +210,9 @@ func largestComponentSize(A []int) int {
     for _,a:= range A{
         if a == 1 { continue }
         //fmt.Println("a:",a)
+        //遍历A，计算A的因子，A的所有因子，都添加到因子集合，指向最小的因子
+        //如果这个因子已经存在，将它指向最小因子。如果这个因子不存在，那么就添加这个因子，并且指向最小因子
+        //如果最小因子不存在，就新建。最最后给最小因子加一。
         minFactor := a
         var j int
         for j= 0; j<len(PInts) && PInts[j] < a; j++{
