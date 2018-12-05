@@ -98,12 +98,7 @@ func backtrack(k int, CELLS*[9][9]cell, bt[][]int) bool{
     if CELLS[i][j].Value > 0 { return backtrack(k+1,CELLS,bt)}
     tmpConstraints := CELLS[i][j].Constraints
     var snapshot [9][9]cell
-    for m:= range CELLS{
-        for n:= range CELLS[m]{
-            snapshot[m][n] = CELLS[m][n]
-        }
-    }
-//    snapshot = CELLS
+    snapshot = *CELLS
     for v:=0; v <=9; v++{
         if !tmpConstraints[v]{
             if set(i,j,v,CELLS) {
@@ -111,12 +106,7 @@ func backtrack(k int, CELLS*[9][9]cell, bt[][]int) bool{
                     return true
                 }
             }
-//            CELLS = snapshot
-            for m:= range CELLS{
-                for n:= range CELLS[m]{
-                    CELLS[m][n] = snapshot[m][n]
-                }
-            }
+            *CELLS = snapshot
         }
     }
     return false
@@ -145,11 +135,9 @@ func solveSudoku(board [][]byte) {
 
     for i:=0; i<9; i++{
         for j:=0; j<9; j++{
-            //fmt.Println("set board[i][i]:",i,j,"to:",board[i][j])
             if board[i][j] != '.' && !set(i,j,int(board[i][j] - '0'),&CELLS){
                 return
             }
-            //fmt.Println("set done")
         }
     }
     //fmt.Println("===========init cells=========")
