@@ -136,40 +136,40 @@ func largestComponentSizeR(A []int) int {
 	for _, int := range PInts {
 		PMap[int] = true
 	}
-    for i:= range A{
-        if PMap[A[i]] && A[i] > 5000{
-            A[i] = 1
-        }
-    }
+	for i := range A {
+		if PMap[A[i]] && A[i] > 5000 {
+			A[i] = 1
+		}
+	}
 
-    Con := func(i,j int) bool{
+	Con := func(i, j int) bool {
 		if PMap[A[j]] || PMap[A[i]] {
 			if A[i]%A[j] == 0 || A[j]%A[i] == 0 {
-                return true
+				return true
 			}
 		}
 		for k := 0; k < len(PInts)/2 && PInts[k] <= A[i] && PInts[k] <= A[j]; k++ {
 			if A[i]%PInts[k] == 0 && A[j]%PInts[k] == 0 {
-                return true
+				return true
 			}
 		}
-        return false
-    }
+		return false
+	}
 	// search the max graph
 	mark := make([]bool, len(A))
 	tmpQue := make([]int, len(A))
 	var res int
-	for i := 0; i< len(A) && res < len(A)-i; i++ {
+	for i := 0; i < len(A) && res < len(A)-i; i++ {
 		//        fmt.Println("i:",i,"A[i]:",A[i],"mark:",mark[i],"cnt:",connections[i])
 		if mark[i] || A[i] == 1 {
 			continue
 		}
 		que_head := 0
 		que_tail := 0
-        queMap := make(map[int]bool,len(A))
+		queMap := make(map[int]bool, len(A))
 		cnt := 0
 		tmpQue[que_head] = i
-        queMap[i] = true
+		queMap[i] = true
 		for que_head <= que_tail {
 			tmp := tmpQue[que_head]
 			que_head++
@@ -183,11 +183,11 @@ func largestComponentSizeR(A []int) int {
 					continue
 				}
 				//                fmt.Println("tmp,j:",tmp,j,"conts:",connections[tmp][j],connections[j][tmp])
-//				if connections[tmp][j]  {
-				if Con(tmp, j)  {
+				//				if connections[tmp][j]  {
+				if Con(tmp, j) {
 					que_tail++
 					tmpQue[que_tail] = j
-                    queMap[j] = true
+					queMap[j] = true
 				}
 			}
 		}
