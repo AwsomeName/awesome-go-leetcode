@@ -28,7 +28,7 @@ func set(i,j,v int) bool {
     c.NumPossibilities = 1
     c.Value = v
     //fmt.Println("Set func: set i,j:",i,j,"to:",v)
-    printCells()
+    //printCells()
     //fmt.Println("-----------")
     for k:=0; k<9; k++{
         //fmt.Println("prop to k,j:",k,j,v)
