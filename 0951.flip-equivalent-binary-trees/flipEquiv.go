@@ -1,51 +1,18 @@
-package problem0949
+package problem0951
 
-import "sort"
+type TreeNode struct{
+    Val int
+    Left *TreeNode
+    Right *TreeNode
+}
 
-func largestTimeFromDigits(A []int) string{
-	sort.Ints(A)
-    if A[0] == A[3] {
-        switch {
-            case A[0] == 0 :
-                return "00:00"
-            case A[0] == 1 :
-                return "11:11"
-            case A[0] == 2 :
-                return "22:22"
-            default:
-                return ""
-        }
-    }
-    maxTime := []int{0,0}
-    for i:= range A{
-        for j:= range A{
-            if j==i {continue}
-            for m:= range A{
-                if m==i || m==j {continue}
-                for n:= range A{
-                    if n==m||n==i||n==j {
-                        continue
-                    }
-                    hour := A[i]*10 + A[j]
-                    min := A[m]*10 + A[n]
-                    if hour > 23 || min > 59 {
-                        continue
-                    }
-                    if hour > maxTime[0] || min > maxTime[1] {
-                        maxTime = []int{hour, min}
-                    }
-                }
-            }
-        }
-    }
-    if maxTime[0] == 0 && maxTime[1] == 0 {
-       return ""
-    }
-    var strMaxTime string
-    strMaxTime = strMaxTime + string(maxTime[0]/10+'0')
-    strMaxTime = strMaxTime + string(maxTime[0]%10+'0')
-    strMaxTime = strMaxTime + string(':')
-    strMaxTime = strMaxTime + string(maxTime[1]/10+'0')
-    strMaxTime = strMaxTime + string(maxTime[1]%10+'0')
-	return strMaxTime
+func flipEq(root1 *TreeNode, root2 *TreeNode) bool{
+    if root1 == nil && root2 == nil { return true}
+    if root1 == nil || root2 == nil { return false}
+    if root1.Val != root2.Val { return false }
+//    if root1.Left == nil && root2.Left == nil && root1.Right == nil && root2.Right == nil { return true}
+    return flipEq(root1.Left,root2.Left)&&flipEq(root1.Right,root2.Right)||flipEq(root1.Left,root2.Right)&&flipEq(root1.Right,root2.Left)
+}
+func flipEquiv(root1 *TreeNode, root2 *TreeNode) bool{
+    return flipEq(root1, root2)
 }
