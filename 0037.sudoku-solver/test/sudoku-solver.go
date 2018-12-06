@@ -29,12 +29,12 @@ func solveSudoku(board [][]byte) {
         if (c.Constraints[v]){
             return false
         }
-        for i:=0;i<=9;i++{
+        for i:=1;i<=9;i++{
             if  i!=v {
                 c.Constraints[i] = true
             }
         }
-        c.Constraints[v] = false // and else need to be true
+//        c.Constraints[v] = false // and else need to be true
         c.NumPossibilities = 1
         c.Value = v
         //fmt.Println("Set func: set i,j:",i,j,"to:",v)
@@ -57,7 +57,7 @@ func solveSudoku(board [][]byte) {
     }
 
     updateConstraints = func(i,j,v int) bool{
-        c := CELLS[i][j]
+        c := &CELLS[i][j]
         if (c.Constraints[v]) {
             return true
         }
@@ -87,6 +87,7 @@ func solveSudoku(board [][]byte) {
                 }
             }
         }
+        fmt.Println("bt len:",len(bt))
         for i := range bt{
             for j:= i+1; j < len(bt); j++{
                 if CELLS[bt[i][0]][bt[i][1]].Value > CELLS[bt[j][0]][bt[j][1]].Value{
