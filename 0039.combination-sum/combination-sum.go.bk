@@ -1,0 +1,48 @@
+package problem0039
+
+import (
+	"sort"
+    //"fmt"
+)
+
+func combinationSum(candidates []int, target int) [][]int {
+    //fmt.Println("------------------------------------")
+	sort.Ints(candidates)
+    var res [][]int
+    initLen :=target / candidates[0]
+    midArray := make([]int, initLen)
+    for i:= range midArray{
+        midArray[i] = candidates[0]
+    }
+    next:= initLen - 1
+    index := 1
+    for len(midArray) > 0 && index < len(candidates) {
+        sum:=0
+        //fmt.Println("this mid:",midArray)
+        for _,x:= range midArray{
+            sum += x
+        }
+        if sum == target {
+            //fmt.Println("tobe append:",midArray)
+            tmp:= make([]int, len(midArray))
+            for j,y:= range midArray{
+                tmp[j] = y
+            }
+            res = append(res, tmp)
+            midArray = midArray[1:]
+            next --
+        }else if sum > target {
+            midArray = midArray[1:]
+            next --
+        }else {
+            midArray[next] = candidates[index]
+            next--
+        }
+        if next < 0 {
+            next = len(midArray) - 1
+            index ++
+        }
+    }
+    //fmt.Println("res:",res)
+    return res
+}
