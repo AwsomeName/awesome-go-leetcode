@@ -40,6 +40,14 @@ func Test_OK(t *testing.T) {
 		},
 		question{
 			p: para{
+				one: []string{"ax", "ay", "ba","bb"},
+			},
+			a: ans{
+				0,
+			},
+		},
+		question{
+			p: para{
 				one: []string{"zyx", "wvu", "tsr"},
 			},
 			a: ans{

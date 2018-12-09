@@ -5,7 +5,7 @@ import "fmt"
 func minDeletionSize(A []string) int {
 	fmt.Println("new--------------------------", A)
 	ans := 0
-	cuts := make([]bool, len(A[0]))
+	cuts := make([]bool, len(A))
 
 	for i := range A[0] {
 		tmp := true
