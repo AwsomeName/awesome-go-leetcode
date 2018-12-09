@@ -46,6 +46,14 @@ func Test_OK(t *testing.T) {
 				3,
 			},
 		},
+		question{
+			p: para{
+				one: []string{"xga", "xfb", "yfa"},
+			},
+			a: ans{
+				1,
+			},
+		},
 	}
 
 	for _, q := range qs {
