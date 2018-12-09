@@ -1,10 +1,13 @@
 package problem0954
 
-//import "fmt"
+import "fmt"
 import "sort"
 
 func canReorderDoubled(A []int) bool {
-	//    fmt.Println("-------------------")
+	fmt.Println("-------------------")
+	if len(A) == 0 {
+		return true
+	}
 	sort.Ints(A)
 
 	index := 0
@@ -21,7 +24,7 @@ func canReorderDoubled(A []int) bool {
 			right = mid
 		}
 	}
-	//   fmt.Println("mid:",mid,left,right)
+	fmt.Println("mid:", mid, left, right)
 	if A[index] == 0 {
 		if index%2 == 1 {
 			if A[index-1] != 0 {
@@ -35,17 +38,17 @@ func canReorderDoubled(A []int) bool {
 			}
 		}
 	} else {
-		if mid%2 == 1 {
-			index = mid + 1
+		if left%2 == 1 {
+			index = left + 1
 		} else {
-			index = mid
+			index = left
 		}
 	}
-	//    fmt.Println("index:",index)
+	fmt.Println("index:", index)
 	PA := A[index:]
 	NA := A[:index]
 	// fmt.Println("PA:",PA)
-	//  fmt.Println("NA:",NA)
+	fmt.Println("NA:", NA)
 
 	for i := 0; i < len(PA)/2; i++ {
 		if PA[i]*2 != PA[len(PA)/2+i] {
@@ -55,7 +58,7 @@ func canReorderDoubled(A []int) bool {
 	}
 	for i := 0; i < len(NA)/2; i++ {
 		if NA[i] != NA[len(NA)/2+i]*2 {
-			//            fmt.Println("cmp:",NA[i],"1x:",NA[len(NA)/2+i], "2x:",2*NA[len(NA)/2+i])
+			fmt.Println("cmp:", NA[i], "1x:", NA[len(NA)/2+i], "2x:", 2*NA[len(NA)/2+i])
 			return false
 		}
 	}
