@@ -5,16 +5,22 @@ import "fmt"
 func minDeletionSize(A []string) int {
 	fmt.Println("-------------------")
 	index := make([]bool, len(A[0]))
-	for i := 0; i < len(A)-1; i++ {
-		lOrder(A[i], A[i+1], index, 0)
-	}
-	res := 0
-	for _, x := range index {
-		if x {
-			res++
+	old := 0
+    res := 0
+	for {
+        old = res
+        res = 0
+		for i := 0; i < len(A)-1; i++ {
+			lOrder(A[i], A[i+1], index, 0)
+            fmt.Println("A:",A[i],A[i+1],"index:",index)
 		}
+		for _, x := range index {
+			if x {
+				res++
+			}
+		}
+		if old == res || res == len(A[0]) {return res}
 	}
-	return res
 }
 
 func lOrder(A string, B string, index []bool, start int) {
@@ -29,5 +35,5 @@ func lOrder(A string, B string, index []bool, start int) {
 		lOrder(A, B, index, start+1)
 	} else if A[start] == B[start] {
 		lOrder(A, B, index, start+1)
-	}
+	} else { return }
 }
