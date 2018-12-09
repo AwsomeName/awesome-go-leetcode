@@ -9,31 +9,28 @@ func minDeletionSize(A []string) int {
     res := 0
 	for {
         old = res
-        res = 0
 		for i := 0; i < len(A)-1; i++ {
-			lOrder(A[i], A[i+1], index, 0)
-            fmt.Println("A:",A[i],A[i+1],"index:",index)
+			lOrder(A[i], A[i+1], index, 0,&res)
+            fmt.Println("A:",A[i],A[i+1],"index:",index,res)
 		}
-		for _, x := range index {
-			if x {
-				res++
-			}
-		}
-		if old == res || res == len(A[0]) {return res}
+		if old == res || res >= len(A[0]) {return res}
 	}
 }
 
-func lOrder(A string, B string, index []bool, start int) {
+func lOrder(A string, B string, index []bool, start int,res *int) {
 	if start > len(A)-1 {
 		return
 	}
 	if index[start] {
-		lOrder(A, B, index, start+1)
+		lOrder(A, B, index, start+1,res)
 	}
 	if A[start] > B[start] {
-		index[start] = true
-		lOrder(A, B, index, start+1)
+        if !index[start] {
+	    	index[start] = true
+            *res ++
+        }
+		lOrder(A, B, index, start+1,res)
 	} else if A[start] == B[start] {
-		lOrder(A, B, index, start+1)
-	} else { return }
+		lOrder(A, B, index, start+1,res)
+	}
 }
