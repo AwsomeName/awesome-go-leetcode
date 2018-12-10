@@ -24,42 +24,45 @@ func find(rods []int, target int, res *bool) {
 }
 
 func cnt(rods []int) int {
-	//fmt.Println("rods:",rods)
-	if len(rods) <= 2 && sum(rods)%2 == 1 {
-		return 0
-	}
-	if len(rods) == 2 && rods[0] != rods[1] {
+	//fmt.Println("rods:",rods,"-------------------")
+	if len(rods) < 2 || len(rods) == 2 && rods[0] != rods[1] {
 		return 0
 	}
 	target := sum(rods) / 2
 	res := false
 	find(rods, target, &res)
-	//    if sum(rods)%2 ==0 && find(rods,target){
 	if sum(rods)%2 == 0 && res {
-		//fmt.Println("target:", target, "sum:", sum(rods))
+		//		fmt.Println("target:", target, "sum:", sum(rods))
 		return target
 	} else {
 		//fmt.Println("else: target:", target, "sum:", sum(rods),"rods:",rods)
+		res := 0
 		for i := 0; i < len(rods); i++ {
-			nRods := rods[1:]
-			nRods = nRods[:len(nRods):len(nRods)]
-			if i > 0 && i < len(nRods) {
-				nRods[i], rods[0] = rods[0], nRods[i]
+			nRods := make([]int, len(rods)-1, len(rods)-1)
+			for j := 0; j < len(rods)-1; j++ {
+				if j >= i {
+					nRods[j] = rods[j+1]
+				} else {
+					nRods[j] = rods[j]
+				}
 			}
-			//fmt.Println("nRods:",nRods)
-			sort.Ints(nRods)
-			//            fmt.Println("call cnt:",nRods)
 			r := cnt(nRods)
-			if r > 0 {
-				return r
+			if len(nRods) == 10 {
+				fmt.Println("nRods:", nRods)
+			}
+			if r > 0 && res < r {
+				res = r
+				if len(nRods) == 10 {
+					fmt.Println("nRods:", nRods, res, rods, "i:", i)
+				}
 			}
 		}
-		return 0
+		return res
 	}
 }
 
 func tallestBillboard(rods []int) int {
-	fmt.Println("----------", rods, "---------")
+	fmt.Println("=================", rods, "=====================")
 	sort.Ints(rods)
 	return cnt(rods)
 }

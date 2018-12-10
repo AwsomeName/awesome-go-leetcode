@@ -54,6 +54,22 @@ func Test_OK(t *testing.T) {
 				0,
 			},
 		},
+		question{
+			p: para{
+				one: []int{3, 4, 3, 3, 2},
+			},
+			a: ans{
+				6,
+			},
+		},
+		question{
+			p: para{
+				one: []int{140, 138, 133, 162, 145, 164, 145, 166, 145, 154, 158},
+			},
+			a: ans{
+				756,
+			},
+		},
 	}
 
 	for _, q := range qs {
