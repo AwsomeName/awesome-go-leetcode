@@ -24,7 +24,11 @@ func find(rods []int, target int, res *bool) {
 }
 
 func cnt(rods []int) int {
+	//fmt.Println("rods:",rods)
 	if len(rods) <= 2 && sum(rods)%2 == 1 {
+		return 0
+	}
+	if len(rods) == 2 && rods[0] != rods[1] {
 		return 0
 	}
 	target := sum(rods) / 2
@@ -32,23 +36,26 @@ func cnt(rods []int) int {
 	find(rods, target, &res)
 	//    if sum(rods)%2 ==0 && find(rods,target){
 	if sum(rods)%2 == 0 && res {
-		fmt.Println("target:", target, "sum:", sum(rods))
+		//fmt.Println("target:", target, "sum:", sum(rods))
 		return target
 	} else {
+		//fmt.Println("else: target:", target, "sum:", sum(rods),"rods:",rods)
 		for i := 0; i < len(rods); i++ {
 			nRods := rods[1:]
 			nRods = nRods[:len(nRods):len(nRods)]
-			if i > 0 {
-				nRods[i] = rods[0]
+			if i > 0 && i < len(nRods) {
+				nRods[i], rods[0] = rods[0], nRods[i]
 			}
+			//fmt.Println("nRods:",nRods)
 			sort.Ints(nRods)
+			//            fmt.Println("call cnt:",nRods)
 			r := cnt(nRods)
 			if r > 0 {
 				return r
 			}
 		}
+		return 0
 	}
-	return 0
 }
 
 func tallestBillboard(rods []int) int {
