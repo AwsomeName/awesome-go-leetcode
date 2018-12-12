@@ -1,4 +1,4 @@
-i still cant fully understand how can u write out such beauty && nice code,how??
+i still cant fully understand how can they write out such beauty && nice code,how??
 first, should understand the meaning of the dp[diff]=a, which represent the max sum (a+a+diff) \
 the pair(a,a+diff) can get. its very hard. when u calculate dp[diff]=a, actually, dp[rods]=(sum-rod)/2 \
 or dp(diff+-rod) = "sum".
