@@ -32,7 +32,7 @@ func cnt(rods []int) int {
 	res := false
 	find(rods, target, &res)
 	if sum(rods)%2 == 0 && res {
-		//		fmt.Println("target:", target, "sum:", sum(rods))
+		//      fmt.Println("target:", target, "sum:", sum(rods))
 		return target
 	} else {
 		//fmt.Println("else: target:", target, "sum:", sum(rods),"rods:",rods)
