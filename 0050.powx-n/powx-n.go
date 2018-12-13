@@ -18,11 +18,11 @@ func myPow(x float64, n int) float64 {
 		if n == 1 {
 			return x
 		}
+		res := cnt(x, n/2)
 		if n%2 == 0 {
-			return cnt(x, n/2) * cnt(x, n/2)
-		} else {
-			return cnt(x, n/2) * cnt(x, n/2) * x
+			return res * res
 		}
+		return res * res * x
 	}
 	if n >= 0 {
 		return cnt(x, n)
