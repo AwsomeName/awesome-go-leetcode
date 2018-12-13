@@ -5,7 +5,6 @@ func permute(nums []int) [][]int {
     var ans [][]int
     taken := make([]bool,n)
     vector := make([]int, n)
-
     makePermutation(0,n,nums,vector,taken,&ans)
     return ans
 }
