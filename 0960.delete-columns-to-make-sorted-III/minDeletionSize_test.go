@@ -24,31 +24,7 @@ func Test_OK(t *testing.T) {
 	qs := []question{
 		question{
 			p: para{
-				one: []string{"ca", "bb", "ac"},
-			},
-			a: ans{
-				1,
-			},
-		},
-		question{
-			p: para{
-				one: []string{"xc", "yb", "za"},
-			},
-			a: ans{
-				0,
-			},
-		},
-		question{
-			p: para{
-				one: []string{"ax", "ay", "ba","bb"},
-			},
-			a: ans{
-				0,
-			},
-		},
-		question{
-			p: para{
-				one: []string{"zyx", "wvu", "tsr"},
+				one: []string{"babca", "bbazb"},
 			},
 			a: ans{
 				3,
@@ -56,18 +32,18 @@ func Test_OK(t *testing.T) {
 		},
 		question{
 			p: para{
-				one: []string{"xga", "xfb", "yfa"},
+				one: []string{"edcba"},
 			},
 			a: ans{
-				1,
+				4,
 			},
 		},
 		question{
 			p: para{
-				one: []string{"doeeqiy", "yabhbqe", "twckqte"},
+				one: []string{"ghi", "def", "abc"},
 			},
 			a: ans{
-				3,
+				0,
 			},
 		},
 	}

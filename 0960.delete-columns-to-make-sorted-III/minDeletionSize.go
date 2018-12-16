@@ -4,26 +4,41 @@ import "fmt"
 
 func minDeletionSize(A []string) int {
 	fmt.Println("new--------------------------", A)
-	ans := 0
-	cuts := make([]bool, len(A))
+    m,n := len(A),len(A[0])
+    dp := make([]int, n)
+    for i:= range dp{
+        dp[i] = 1
+    }
 
-	for i := range A[0] {
-		tmp := true
-		for j := 0; j < len(A)-1; j++ {
-			if !cuts[j] && A[j][i] > A[j+1][i] {
-				ans++
-				fmt.Println("need move:", i, cuts[j], A[j][i], A[j+1][i])
-				tmp = false
-				break
-			}
-		}
-		if tmp {
-			for k := 0; k < len(A)-1; k++ {
-				if A[k][i] < A[k+1][i] {
-					cuts[k] = true
-				}
-			}
-		}
-	}
-	return ans
+    for i:= 1; i < n ; i ++{
+        for j := 0; j < i ; j ++{
+            tmp := false
+            for k:=0; k<m; k ++{
+                if A[k][j] > A[k][i] {
+                    tmp = false
+                    break
+                }
+                tmp = true
+            }
+            if tmp {
+                dp[i] = max(dp[i],dp[j]+1)
+            }
+        }
+    }
+    res := 0
+    for _,x := range dp{
+        if res < x {
+            res = x
+        }
+    }
+    return n-res
+}
+
+
+func max(a,b int) int{
+    if a < b {
+        return b
+    }else {
+        return a
+    }
 }
