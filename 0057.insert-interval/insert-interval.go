@@ -6,46 +6,44 @@ type Interval struct {
 	End   int
 }
 
-func insert(a []Interval, newItv Interval) []Interval {
+func insert(intervals []Interval, newInterval Interval) []Interval {
+	a := intervals
+
 	lenA := len(a)
 
 	if lenA == 0 {
-		return []Interval{newItv}
+		return []Interval{newInterval}
 	}
 
-	if newItv.End < a[0].Start {
-		return append([]Interval{newItv}, a...)
+	if newInterval.End < a[0].Start {
+		return append([]Interval{newInterval}, a...)
 	}
 
-	if a[lenA-1].End < newItv.Start {
-		return append(a, newItv)
+	if newInterval.Start > a[lenA-1].End {
+		return append(a, newInterval)
 	}
 
 	res := make([]Interval, 0, len(a))
 	for i := range a {
-		if isOverlap(a[i], newItv) {
-			newItv = merge(a[i], newItv)
-
+		if isOverlap(a[i], newInterval) {
+			newInterval = merge(a[i], newInterval)
 			if i == lenA-1 {
-				res = append(res, newItv)
+				res = append(res, newInterval)
 			}
-
 			continue
 		}
 
-		if a[i].End < newItv.Start {
+		if a[i].End < newInterval.Start {
 			res = append(res, a[i])
 			continue
 		}
 
-		if newItv.End < a[i].Start {
-			res = append(res, newItv)
+		if newInterval.End < a[i].Start {
+			res = append(res, newInterval)
 			res = append(res, a[i:]...)
 			break
 		}
-
 	}
-
 	return res
 }
 
