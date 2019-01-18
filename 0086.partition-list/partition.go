@@ -33,6 +33,9 @@ func partition(head *ListNode, x int) *ListNode {
 		}
 		head = head.Next
 	}
+	if lHdr == nil {
+		return rHdr
+	}
 
 	left.Next = rHdr
 
